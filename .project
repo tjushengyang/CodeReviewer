@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.python.pydev.pythonNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/Frame.py</name>
+			<type>1</type>
+			<location>D:/project/python/CodeReviewer/src/Frame.py</location>
+		</link>
+	</linkedResources>
 </projectDescription>

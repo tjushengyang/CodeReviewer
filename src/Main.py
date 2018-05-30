@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 import wx
 import Frame
+import sys
 if __name__ == '__main__':
     app = wx.App() 
     window = Frame.MyFrame1(None) 

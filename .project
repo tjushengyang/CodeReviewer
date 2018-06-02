@@ -20,10 +20,5 @@
 			<type>1</type>
 			<location>D:/project/python/CodeReviewer/src/Frame.py</location>
 		</link>
-		<link>
-			<name>src/fetch.py</name>
-			<type>1</type>
-			<location>D:/project/python/CodeReviewer/src/fetch.py</location>
-		</link>
 	</linkedResources>
 </projectDescription>

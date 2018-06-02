@@ -6,11 +6,10 @@ import os
 import shutil
 def get_file_content(git_oper,branch_name,rel_file):
     try:
-        git_cmd = (branch_name +':'+ rel_file)
-        print(git_cmd)
-        single_file_content = (git_oper.show(git_cmd)).encode('utf-8')
+        git_cmd = branch_name +r':'+ rel_file
+        raw_content = git_oper.show(git_cmd)
+        single_file_content = raw_content.encode('utf-8','ignore')
     except:
-        print('err')
         raise
     return single_file_content
 

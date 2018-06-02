@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 import git
-import sys
 import os
 import shutil
+import zipfile
 def get_file_content(git_oper,branch_name,rel_file):
     try:
         git_cmd = branch_name +r':'+ rel_file
@@ -22,6 +22,24 @@ def copy_single_file(dst_path,rel_file,file_content):
         os.makedirs(dir_name)
     with open(full_path,'wb') as f:
         f.write(file_content)
+
+def dfs_get_zip_file(input_path,result):
+#
+    files = os.listdir(input_path)
+    for file in files:
+        if os.path.isdir(input_path+'\\'+file):
+            dfs_get_zip_file(input_path+'\\'+file,result)
+        else:
+            result.append(input_path+'\\'+file)
+
+def zip_path(input_path,output_path,output_name):
+    with zipfile.ZipFile(output_path+'\\'+output_name,'w',zipfile.ZIP_DEFLATED) as f:
+        filelists = []
+        dfs_get_zip_file(input_path,filelists)
+        for file in filelists:
+            f.write(file)
+    return output_path+'\\'+output_name
+
     
 def copy_file(old_branch,new_branch,repo_path,dst_path):
     if(os.path.exists(repo_path) and os.path.isdir(repo_path)):
@@ -70,9 +88,12 @@ def copy_file(old_branch,new_branch,repo_path,dst_path):
             except:
                 pass
             else:
-                copy_single_file(temp_path_new,single_file,new_file_content)  
+                copy_single_file(temp_path_new,single_file,new_file_content)
+                  
+            zip_path(temp_path,dst_path,'work1.zip')               
+                
     finally:
-#         shutil.rmtree(temp_path)
+        shutil.rmtree(temp_path)
         pass
     return 0
 

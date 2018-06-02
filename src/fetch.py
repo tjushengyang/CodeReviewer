@@ -4,6 +4,24 @@ import git
 import sys
 import os
 import shutil
+def get_file_content(git_oper,branch_name,rel_file):
+    try:
+        single_file_content = git_oper.show(branch_name+':'+rel_file)
+    except:
+        raise
+    return single_file_content
+
+def copy_single_file(dst_path,rel_file,file_content):
+    if(not (os.path.exists(dst_path) and os.path.isdir(dst_path)) ):
+        return -1
+    full_path = os.path.join(dst_path,rel_file.replace('/','\\'))
+    dir_name = os.path.dirname(full_path) 
+    if(not os.path.exists(dir_name)):
+        os.makedirs(dir_name)
+    with open(full_path,'w') as f:
+        f.write(file_content)
+    
+    
 def copy_file(old_branch,new_branch,repo_path,dst_path):
     if(os.path.exists(repo_path) and os.path.isdir(repo_path)):
         pass
@@ -16,7 +34,7 @@ def copy_file(old_branch,new_branch,repo_path,dst_path):
     temp_path = 'C:\\tempForGitDiff'
     temp_path_new = os.path.join(temp_path,'new')
     temp_path_old = os.path.join(temp_path,'old')
-    # ´´½¨ÁÙÊ±Ä¿Â¼
+    # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ä¿Â¼
     if(not os.path.exists(temp_path_new)):
         ret = os.makedirs(temp_path_new)
         if(False == ret):
@@ -38,14 +56,24 @@ def copy_file(old_branch,new_branch,repo_path,dst_path):
         git_oper.fetch() 
         query_result = git_oper.diff('--name-only',old_branch,new_branch)
         rel_file_list = query_result.split('\n')
-        abs_file_list = []
-        for item in rel_file_list:
-            abs_file_list.append(os.path.join(temp_path_new,item.replace('/','\\')))
-        print(abs_file_list)
+        for single_file in rel_file_list:
+            continue_flag = 0
+#             abs_file_list.append(os.path.join(temp_path_new,item.replace('/','\\')))
+            try:
+                old_file_content = get_file_content(git_oper,old_branch,single_file)
+            except:
+                pass
+            else:
+                copy_single_file(temp_path_old,single_file,old_file_content) 
+            try:
+                new_file_content = get_file_content(git_oper,new_branch,single_file)
+            except:
+                pass
+            else:
+                copy_single_file(temp_path_new,single_file,new_file_content)  
     finally:
-        shutil.rmtree(temp_path)
-        
- #         print(os.path.basename(abs_file_list[0]))
+#         shutil.rmtree(temp_path)
+        pass
     return 0
 
-print(copy_file('HEAD','HEAD^','D:\\01Code\\UGWV9R18C00_doc','D:\\'))
+print(copy_file('HEAD','HEAD^','D:\\project\\test1','D:\\'))

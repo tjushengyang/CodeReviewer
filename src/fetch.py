@@ -6,7 +6,7 @@ import os
 import shutil
 def get_file_content(git_oper,branch_name,rel_file):
     try:
-        single_file_content = git_oper.show(branch_name+':'+rel_file)
+        single_file_content = (git_oper.show(branch_name+':'+rel_file)).encode('utf-8')
     except:
         raise
     return single_file_content
@@ -18,7 +18,7 @@ def copy_single_file(dst_path,rel_file,file_content):
     dir_name = os.path.dirname(full_path) 
     if(not os.path.exists(dir_name)):
         os.makedirs(dir_name)
-    with open(full_path,'w') as f:
+    with open(full_path,'wb') as f:
         f.write(file_content)
     
     
@@ -57,8 +57,6 @@ def copy_file(old_branch,new_branch,repo_path,dst_path):
         query_result = git_oper.diff('--name-only',old_branch,new_branch)
         rel_file_list = query_result.split('\n')
         for single_file in rel_file_list:
-            continue_flag = 0
-#             abs_file_list.append(os.path.join(temp_path_new,item.replace('/','\\')))
             try:
                 old_file_content = get_file_content(git_oper,old_branch,single_file)
             except:
@@ -76,4 +74,4 @@ def copy_file(old_branch,new_branch,repo_path,dst_path):
         pass
     return 0
 
-print(copy_file('HEAD','HEAD^','D:\\project\\test1','D:\\'))
+print(copy_file('HEAD','HEAD^','D:\\project\\python\\CodeReviewer','D:\\'))

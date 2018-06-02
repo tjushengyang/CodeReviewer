@@ -13,24 +13,55 @@ import wx.xrc
 ###########################################################################
 ## Class MyFrame1
 ###########################################################################
+
 class MyFrame1 ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = "CodeReviewer", pos = wx.DefaultPosition, size = wx.Size( 600,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 229,470 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
-		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
 		bSizer2 = wx.BoxSizer( wx.VERTICAL )
 		
-		self.m_staticText4 = wx.StaticText( self, wx.ID_ANY, u"MR URL", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText4.Wrap( -1 )
-		bSizer2.Add( self.m_staticText4, 0, wx.ALL, 5 )
+		self.m_s_login = wx.StaticText( self, wx.ID_ANY, u"Login CodeClub", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_s_login.Wrap( -1 )
+		bSizer2.Add( self.m_s_login, 0, wx.ALL, 5 )
 		
-		self.m_textCtrl3 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer2.Add( self.m_textCtrl3, 0, wx.ALL|wx.EXPAND, 5 )
+		self.m_s_username = wx.StaticText( self, wx.ID_ANY, u"Username", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_s_username.Wrap( -1 )
+		bSizer2.Add( self.m_s_username, 0, wx.ALL, 5 )
 		
-		self.m_button1 = wx.Button( self, wx.ID_ANY, u"Generate", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer2.Add( self.m_button1, 0, wx.ALL, 5 )
+		self.m_username = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.Point( -1,-1 ), wx.Size( 200,-1 ), 0 )
+		self.m_username.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 90, False, wx.EmptyString ) )
+		
+		bSizer2.Add( self.m_username, 0, wx.ALL, 5 )
+		
+		self.m_s_password = wx.StaticText( self, wx.ID_ANY, u"Password", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_s_password.Wrap( -1 )
+		bSizer2.Add( self.m_s_password, 0, wx.ALL, 5 )
+		
+		self.m_password = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), wx.TE_PASSWORD )
+		bSizer2.Add( self.m_password, 0, wx.ALL, 5 )
+		
+		self.m_s_rep_path = wx.StaticText( self, wx.ID_ANY, u"Repository Path", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_s_rep_path.Wrap( -1 )
+		bSizer2.Add( self.m_s_rep_path, 0, wx.ALL, 5 )
+		
+		self.m_rep_path = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		bSizer2.Add( self.m_rep_path, 0, wx.ALL, 5 )
+		
+		self.m_s_output_path = wx.StaticText( self, wx.ID_ANY, u"Output Path", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_s_output_path.Wrap( -1 )
+		bSizer2.Add( self.m_s_output_path, 0, wx.ALL, 5 )
+		
+		self.m_output_path = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		bSizer2.Add( self.m_output_path, 0, wx.ALL, 5 )
+		
+		self.m_generate = wx.Button( self, wx.ID_ANY, u"Generate", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer2.Add( self.m_generate, 0, wx.ALL, 5 )
+		
+		self.m_open_path = wx.Button( self, wx.ID_ANY, u"Open", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer2.Add( self.m_open_path, 0, wx.ALL, 5 )
 		
 		
 		self.SetSizer( bSizer2 )
@@ -39,7 +70,7 @@ class MyFrame1 ( wx.Frame ):
 		self.Centre( wx.BOTH )
 		
 		# Connect Events
-		self.m_button1.Bind( wx.EVT_BUTTON, self.GenerateSourceCode )
+		self.m_generate.Bind( wx.EVT_BUTTON, self.GenerateSourceCode )
 	
 	def __del__( self ):
 		pass

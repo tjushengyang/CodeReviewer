@@ -76,4 +76,4 @@ def copy_file(old_branch,new_branch,repo_path,dst_path):
         pass
     return 0
 
-print(copy_file(r'4722cce5',r'HEAD','D:\\project\\python\\CodeReviewer','D:\\'))
+print(copy_file('HEAD^','HEAD','D:\\project\\python\\CodeReviewer','D:\\'))

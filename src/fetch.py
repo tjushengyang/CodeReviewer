@@ -6,8 +6,11 @@ import os
 import shutil
 def get_file_content(git_oper,branch_name,rel_file):
     try:
-        single_file_content = (git_oper.show(branch_name+':'+rel_file)).encode('utf-8')
+        git_cmd = (branch_name +':'+ rel_file)
+        print(git_cmd)
+        single_file_content = (git_oper.show(git_cmd)).encode('utf-8')
     except:
+        print('err')
         raise
     return single_file_content
 
@@ -21,12 +24,12 @@ def copy_single_file(dst_path,rel_file,file_content):
     with open(full_path,'wb') as f:
         f.write(file_content)
     
-    
 def copy_file(old_branch,new_branch,repo_path,dst_path):
     if(os.path.exists(repo_path) and os.path.isdir(repo_path)):
         pass
     else:
         return -1
+    
     if(os.path.exists(dst_path) and os.path.isdir(dst_path)):
         pass
     else:
@@ -34,7 +37,7 @@ def copy_file(old_branch,new_branch,repo_path,dst_path):
     temp_path = 'C:\\tempForGitDiff'
     temp_path_new = os.path.join(temp_path,'new')
     temp_path_old = os.path.join(temp_path,'old')
-    # ������ʱĿ¼
+
     if(not os.path.exists(temp_path_new)):
         ret = os.makedirs(temp_path_new)
         if(False == ret):
@@ -74,4 +77,4 @@ def copy_file(old_branch,new_branch,repo_path,dst_path):
         pass
     return 0
 
-print(copy_file('HEAD','HEAD^','D:\\project\\python\\CodeReviewer','D:\\'))
+print(copy_file(r'4722cce5',r'HEAD','D:\\project\\python\\CodeReviewer','D:\\'))

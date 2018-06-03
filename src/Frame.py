@@ -10,6 +10,22 @@
 import wx
 import wx.xrc
 import repo_conf
+import copy_file
+
+###########################################################################
+## Class MyFrame1
+###########################################################################
+# -*- coding: utf-8 -*- 
+
+###########################################################################
+## Python code generated with wxFormBuilder (version Jun 17 2015)
+## http://www.wxformbuilder.org/
+##
+## PLEASE DO "NOT" EDIT THIS FILE!
+###########################################################################
+
+import wx
+import wx.xrc
 
 ###########################################################################
 ## Class MyFrame1
@@ -23,7 +39,7 @@ class MyFrame1 ( wx.Frame ):
 		password    = repo_conf.get_option_value('remote','password')
 		repo_path   = repo_conf.get_option_value('local','repository')
 		output_path = repo_conf.get_option_value('local','output')
-		
+				
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
 		bSizer2 = wx.BoxSizer( wx.VERTICAL )
@@ -47,6 +63,13 @@ class MyFrame1 ( wx.Frame ):
 		
 		self.m_password = wx.TextCtrl( self, wx.ID_ANY, password, wx.DefaultPosition, wx.Size( 200,-1 ), wx.TE_PASSWORD )
 		bSizer2.Add( self.m_password, 0, wx.ALL, 5 )
+		
+		self.m_s_mr_url = wx.StaticText( self, wx.ID_ANY, u"Mr URL", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_s_mr_url.Wrap( -1 )
+		bSizer2.Add( self.m_s_mr_url, 0, wx.ALL, 5 )
+		
+		self.m_mr_url = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		bSizer2.Add( self.m_mr_url, 0, wx.ALL, 5 )
 		
 		self.m_s_rep_path = wx.StaticText( self, wx.ID_ANY, u"Repository Path", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_s_rep_path.Wrap( -1 )
@@ -83,6 +106,9 @@ class MyFrame1 ( wx.Frame ):
 	
 	# Virtual event handlers, overide them in your derived class
 	def GenerateSourceCode( self, event ):
+		repo_path = self.m_rep_path.GetValue()
+		dst_path = self.m_output_path.GetValue()
+		copy_file.copy_file('head^','head', repo_path, dst_path)
 		event.Skip()
 	
 

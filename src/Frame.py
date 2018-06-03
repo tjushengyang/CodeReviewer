@@ -11,6 +11,7 @@ import wx
 import wx.xrc
 import repo_conf
 import copy_file
+import os
 
 ###########################################################################
 ## Class MyFrame1
@@ -88,6 +89,7 @@ class MyFrame1 ( wx.Frame ):
 		
 		# Connect Events
 		self.m_generate.Bind( wx.EVT_BUTTON, self.GenerateSourceCode )
+		self.m_open_path.Bind( wx.EVT_BUTTON, self.OpenDstPath )
 	
 	def __del__( self ):
 		pass
@@ -109,4 +111,7 @@ class MyFrame1 ( wx.Frame ):
 		diag.ShowModal()
 		event.Skip()
 	
-
+	def OpenDstPath( self, event ):
+		dst_path = self.m_output_path.GetValue()
+		os.system("start explorer "+dst_path)
+		event.Skip()

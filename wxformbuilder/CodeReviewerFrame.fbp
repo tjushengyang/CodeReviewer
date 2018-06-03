@@ -44,10 +44,10 @@
             <property name="minimum_size"></property>
             <property name="name">MyFrame1</property>
             <property name="pos"></property>
-            <property name="size">229,470</property>
+            <property name="size">280,470</property>
             <property name="style">wxDEFAULT_FRAME_STYLE</property>
             <property name="subclass"></property>
-            <property name="title"></property>
+            <property name="title">CodeClub Review Tool</property>
             <property name="tooltip"></property>
             <property name="window_extra_style"></property>
             <property name="window_name"></property>

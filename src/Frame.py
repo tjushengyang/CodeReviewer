@@ -15,7 +15,11 @@ import copy_file
 ###########################################################################
 ## Class MyFrame1
 ###########################################################################
-
+class MyDiag(wx.MessageDialog):
+	def __init__( self, parent,msg ):	
+		wx.MessageDialog.__init__(self,parent,msg,'info',wx.OK)
+		self.SetSize(0, 0, 200, 200, wx.SIZE_AUTO)
+		
 class MyFrame1 ( wx.Frame ):
 	
 	def __init__( self, parent ):
@@ -25,7 +29,7 @@ class MyFrame1 ( wx.Frame ):
 		repo_path   = repo_conf.get_option_value('local','repository')
 		output_path = repo_conf.get_option_value('local','output')
 				
-		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
 		bSizer2 = wx.BoxSizer( wx.VERTICAL )
 		
@@ -94,6 +98,12 @@ class MyFrame1 ( wx.Frame ):
 		repo_path = self.m_rep_path.GetValue()
 		dst_path = self.m_output_path.GetValue()
 		ret = copy_file.copy_file('head^','head', repo_path, dst_path)
+		if(0 == ret):
+			repo_conf.set_cfg()
+			diag = MyDiag(self,'export file success!')
+		else:
+			diag = MyDiag(self,'export file fail!')
+		diag.ShowModal()
 		event.Skip()
 	
 

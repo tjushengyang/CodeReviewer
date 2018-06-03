@@ -8,4 +8,8 @@ def get_option_value(section,option):
         return cf.get(section,option)
     return ''
 
+def set_cfg():
+    pass
+    
+
 

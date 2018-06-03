@@ -54,6 +54,7 @@ def copy_file(old_branch,new_branch,repo_path,dst_path):
     else:
         return -1
     temp_path = 'C:\\tempForGitDiff'
+    shutil.rmtree(temp_path,True)
     temp_path_new = os.path.join(temp_path,'new')
     temp_path_old = os.path.join(temp_path,'old')
 

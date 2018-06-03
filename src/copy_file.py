@@ -98,6 +98,3 @@ def copy_file(old_branch,new_branch,repo_path,dst_path):
         shutil.rmtree(temp_path)
         pass
     return 0
-repo_path = repo_conf.get_option_value('local','repository')
-dst_path = repo_conf.get_option_value('local','output')
-print(copy_file('HEAD^','HEAD',repo_path,dst_path))

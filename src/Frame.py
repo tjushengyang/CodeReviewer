@@ -15,21 +15,6 @@ import copy_file
 ###########################################################################
 ## Class MyFrame1
 ###########################################################################
-# -*- coding: utf-8 -*- 
-
-###########################################################################
-## Python code generated with wxFormBuilder (version Jun 17 2015)
-## http://www.wxformbuilder.org/
-##
-## PLEASE DO "NOT" EDIT THIS FILE!
-###########################################################################
-
-import wx
-import wx.xrc
-
-###########################################################################
-## Class MyFrame1
-###########################################################################
 
 class MyFrame1 ( wx.Frame ):
 	
@@ -108,7 +93,7 @@ class MyFrame1 ( wx.Frame ):
 	def GenerateSourceCode( self, event ):
 		repo_path = self.m_rep_path.GetValue()
 		dst_path = self.m_output_path.GetValue()
-		copy_file.copy_file('head^','head', repo_path, dst_path)
+		ret = copy_file.copy_file('head^','head', repo_path, dst_path)
 		event.Skip()
 	
 

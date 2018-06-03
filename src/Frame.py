@@ -95,11 +95,14 @@ class MyFrame1 ( wx.Frame ):
 	
 	# Virtual event handlers, overide them in your derived class
 	def GenerateSourceCode( self, event ):
+		username = self.m_username.GetValue()
+		password = self.m_password.GetValue()
 		repo_path = self.m_rep_path.GetValue()
 		dst_path = self.m_output_path.GetValue()
 		ret = copy_file.copy_file('head^','head', repo_path, dst_path)
 		if(0 == ret):
-			repo_conf.set_cfg()
+			loginfo = repo_conf.LogInfo(username,password,repo_path,dst_path)
+			repo_conf.set_cfg(loginfo)
 			diag = MyDiag(self,'export file success!')
 		else:
 			diag = MyDiag(self,'export file fail!')
